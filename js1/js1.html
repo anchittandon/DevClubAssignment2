@@ -11,10 +11,12 @@
 			.inputbox input {width: 100%; text-indent: 2%; Height:30px;}
 			.list {min-height:0px; background-color: #EEE;}
 			ul.bullet {width: 100%; list-style-type: none; background: #DDD; padding: 0;	margin: 0;	cursor: pointer;}
+			ul.bullet li {width: 100%; min-height: 35px;	font-size: 25px; text-indent: 1%;	padding: 1%;}
 			ul.bullet li button {height: 30px; width: 30px; float: left; padding: 0; margin: auto; visibility: hidden; background: red;}
 			ul.bullet li button:last-of-type {background: green;}
 			ul.bullet li:hover button {visibility: visible;}
 			ul.bullet li button img {height: 20px; width: 20px; cursor: pointer; padding: 0; margin: 0;}
+			ul.bullet#done li {min-height:0px; text-decoration: line-through;}
 		</style>	
 	</head>
 	<body>
@@ -27,7 +29,7 @@
 			</div>
 			<div class="list">
 				<ul class="bullet" id="bullet"></ul>
-				<hr />
+				
 				<ul class="bullet" id="done"></ul>
 			</div>
 			<script type="text/javascript">
@@ -38,6 +40,13 @@
 				function addToList() {
 					let list_item = document.getElementById('item').value;
 					if (list_item) {document.getElementById('item').value = '';	addItem(list_item);}}
+				function completeItem() {
+					let item = this;
+					let parent = item.parentNode;
+					let id = parent.id;
+					let target = (id == 'bullet' ? document.getElementById('done') : document.getElementById('bullet'));
+					parent.removeChild(item);
+					target.insertBefore(item, target.childNodes[0]);}				
 				function addItem(text) {
 					let list = document.getElementById('bullet');
 					let item = document.createElement('li');
