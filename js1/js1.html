@@ -52,6 +52,23 @@
 					let item = it.parentNode.parentNode;
 					let parent = item.parentNode;
 					parent.removeChild(item);}
+				function modifier(event, it) {
+					if (event.keyCode == 13) {
+						let item = it.parentNode;
+						let text = it.value;
+						item.textContent  = text;
+						let buttons = document.createElement('span');
+						buttons.innerHTML = delete_button+edit_button;
+						item.appendChild(buttons);
+						item.addEventListener('click', completeItem);}}
+				function editItem(event, it) {
+					event.stopPropagation();
+					let item = it.parentNode.parentNode;
+					let item_copy = item;
+					let list = item.parentNode;
+					let text = item.textContent ;
+					item.removeEventListener('click', completeItem);
+					item.innerHTML = '<input type="text" id="modifier" onkeypress="modifier(event, this)" value="'+text+'">';	}
 				function addItem(text) {
 					let list = document.getElementById('bullet');
 					let item = document.createElement('li');
@@ -64,10 +81,5 @@
 					//-->
 			</script>
 		</div>
-				
-			
-			
-		</div>
-
 	</body>
 </html>
