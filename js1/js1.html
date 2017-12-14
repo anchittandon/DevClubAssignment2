@@ -46,7 +46,12 @@
 					let id = parent.id;
 					let target = (id == 'bullet' ? document.getElementById('done') : document.getElementById('bullet'));
 					parent.removeChild(item);
-					target.insertBefore(item, target.childNodes[0]);}				
+					target.insertBefore(item, target.childNodes[0]);}
+				function deleteItem(event, it) {
+					event.stopPropagation();
+					let item = it.parentNode.parentNode;
+					let parent = item.parentNode;
+					parent.removeChild(item);}
 				function addItem(text) {
 					let list = document.getElementById('bullet');
 					let item = document.createElement('li');
